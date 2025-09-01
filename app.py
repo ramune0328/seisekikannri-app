@@ -36,55 +36,34 @@ def programing_analysis(df):
     if df.empty:
         print("データがありません。")
         return
-    print("\n=== 成績分析 ===")
-    print(f"平均点: {df['programing_score'].mean():.2f}")
-    print(f"中央値: {df['programing_score'].median():.2f}")
-    print(f"標準偏差: {df['programing_score'].std():.2f}")
-    print(f"最高点: {df['programing_score'].max()}")
-    print(f"最低点: {df['programing_score'].min()}")
-    pass_rate = (df['programing_score'] >= 60).mean() * 100
-    print(f"合格率: {pass_rate:.1f}%")
+    analyze(df, "programing_")
 
 # ネットワークの分析
 def network_analysis(df):
     if df.empty:
         print("データがありません。")
         return
-    print("\n=== 成績分析 ===")
-    print(f"平均点: {df['network_score'].mean():.2f}")
-    print(f"中央値: {df['network_score'].median():.2f}")
-    print(f"標準偏差: {df['network_score'].std():.2f}")
-    print(f"最高点: {df['network_score'].max()}")
-    print(f"最低点: {df['network_score'].min()}")
-    pass_rate = (df['network_score'] >= 60).mean() * 100
-    print(f"合格率: {pass_rate:.1f}%")
+    analyze(df, "network_")
 
 # 数学の分析
 def math_analyssis(df):
     if df.empty:
         print("データがありません。")
         return
-    print("\n=== 成績分析 ===")
-    print(f"平均点: {df['math_score'].mean():.2f}")
-    print(f"中央値: {df['math_score'].median():.2f}")
-    print(f"標準偏差: {df['math_score'].std():.2f}")
-    print(f"最高点: {df['math_score'].max()}")
-    print(f"最低点: {df['math_score'].min()}")
-    pass_rate = (df['math_score'] >= 60).mean() * 100
-    print(f"合格率: {pass_rate:.1f}%")
+    analyze(df, "math_")
 
 # 成績分析
-def analyze(df):
+def analyze(df, subject):
     if df.empty:
         print("データがありません。")
         return
     print("\n=== 成績分析 ===")
-    print(f"平均点: {df['score'].mean():.2f}")
-    print(f"中央値: {df['score'].median():.2f}")
-    print(f"標準偏差: {df['score'].std():.2f}")
-    print(f"最高点: {df['score'].max()}")
-    print(f"最低点: {df['score'].min()}")
-    pass_rate = (df['score'] >= 60).mean() * 100
+    print(f"平均点: {df[subject + 'score'].mean():.2f}")
+    print(f"中央値: {df[subject + 'score'].median():.2f}")
+    print(f"標準偏差: {df[subject + 'score'].std():.2f}")
+    print(f"最高点: {df[subject + 'score'].max()}")
+    print(f"最低点: {df[subject + 'score'].min()}")
+    pass_rate = (df[subject + 'score'] >= 60).mean() * 100
     print(f"合格率: {pass_rate:.1f}%")
 
 # ヒストグラム
