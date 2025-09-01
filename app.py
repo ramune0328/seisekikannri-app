@@ -5,14 +5,14 @@ import os # ファイル管理
 
 matplotlib.rcParams['font.family'] = 'Meiryo'
 
-FILENAME = r"C:my program\成績管理アプリ\students.csv"
+FILENAME = r"C:\my program\成績管理アプリ\students.csv"
 
 # CSV読み込み（存在しなければ空のDataFrameを返す）
 def load_data():
     if os.path.exists(FILENAME):
         df = pd.read_csv(FILENAME)
     else:
-        df = pd.DataFrame(columns=["name", "programing-score", "network-score", "math-score"])
+        df = pd.DataFrame(columns=["name", "programing_score", "network_score", "math_score", "total"])
     return df
 
 # CSV保存（上書き）
@@ -27,7 +27,7 @@ def add_student():
     programing_score = int(input("プログラミングの点数: "))
     network_score = int(input("ネットワークの点数: "))
     math_score = int(input("数学の点数: "))
-    df = pd.concat([df, pd.DataFrame([{"name": name, "programing-score": programing_score, "network-score": network_score, "math-score": math_score, "total": programing_score + network_score + math_score}])], ignore_index=True)
+    df = pd.concat([df, pd.DataFrame([{"name": name, "programing_score": programing_score, "network_score": network_score, "math_score": math_score, "total": programing_score + network_score + math_score}])], ignore_index=True)
     save_data(df)
     print(f"{name}さんのデータを追加しました。")
 
