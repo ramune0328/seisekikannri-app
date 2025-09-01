@@ -38,6 +38,25 @@ def programing_analysis(df):
         return
     analyze(df, "programing_")
 
+    # 3つのグラフを1つのウィンドウにまとめる
+    fig, axes = plt.subplots(1, 2, figsize=(10, 5))  # 1行3列
+    df['programing_score'].hist(ax=axes[0], bins=10, edgecolor="black")
+
+    # ヒストグラム
+    axes[0].set_title("ヒストグラム")
+    axes[0].set_xlabel("点数")
+    axes[0].set_ylabel("人数")
+
+    # 合格率
+    pass_count = (df['programing_score'] >= 60).sum()
+    fail_count = (df['programing_score'] < 60).sum()
+    axes[1].pie([pass_count, fail_count], labels=["合格", "不合格"], autopct="%1.1f%%")
+    axes[1].set_title("合格率")
+
+    plt.tight_layout()
+    plt.show()
+
+
 # ネットワークの分析
 def network_analysis(df):
     if df.empty:
@@ -45,12 +64,48 @@ def network_analysis(df):
         return
     analyze(df, "network_")
 
+    # 3つのグラフを1つのウィンドウにまとめる
+    fig, axes = plt.subplots(1, 2, figsize=(10, 5))  # 1行3列
+    df['programing_score'].hist(ax=axes[0], bins=10, edgecolor="black")
+
+    # ヒストグラム
+    axes[0].set_title("ヒストグラム")
+    axes[0].set_xlabel("点数")
+    axes[0].set_ylabel("人数")
+
+    # 合格率
+    pass_count = (df['programing_score'] >= 60).sum()
+    fail_count = (df['programing_score'] < 60).sum()
+    axes[1].pie([pass_count, fail_count], labels=["合格", "不合格"], autopct="%1.1f%%")
+    axes[1].set_title("合格率")
+
+    plt.tight_layout()
+    plt.show()
+
 # 数学の分析
 def math_analyssis(df):
     if df.empty:
         print("データがありません。")
         return
     analyze(df, "math_")
+
+    # 3つのグラフを1つのウィンドウにまとめる
+    fig, axes = plt.subplots(1, 2, figsize=(10, 5))  # 1行3列
+    df['programing_score'].hist(ax=axes[0], bins=10, edgecolor="black")
+
+    # ヒストグラム
+    axes[0].set_title("ヒストグラム")
+    axes[0].set_xlabel("点数")
+    axes[0].set_ylabel("人数")
+
+    # 合格率
+    pass_count = (df['programing_score'] >= 60).sum()
+    fail_count = (df['programing_score'] < 60).sum()
+    axes[1].pie([pass_count, fail_count], labels=["合格", "不合格"], autopct="%1.1f%%")
+    axes[1].set_title("合格率")
+
+    plt.tight_layout()
+    plt.show()
 
 # 成績分析
 def analyze(df, subject):
@@ -67,35 +122,23 @@ def analyze(df, subject):
     print(f"合格率: {pass_rate:.1f}%")
 
 # ヒストグラム
-def plot_hist(df):
+def plot_hist(df, subject):
     if df.empty:
         print("データがありません。")
         return
-    df['score'].hist(bins=10, edgecolor="black")
+    df[subject + 'score'].hist(bins=10, edgecolor="black")
     plt.title("点数分布（ヒストグラム）")
     plt.xlabel("点数")
     plt.ylabel("人数")
     plt.show()
 
-# ランキング（棒グラフ）
-def plot_ranking(df):
-    if df.empty:
-        print("データがありません。")
-        return
-    ranking = df.sort_values("score", ascending=False).head(10)
-    plt.bar(ranking["name"], ranking["score"])
-    plt.title("上位10人の点数")
-    plt.xlabel("学生名")
-    plt.ylabel("点数")
-    plt.show()
-
 # 合格率（円グラフ）
-def plot_passrate(df):
+def plot_passrate(df, subject):
     if df.empty:
         print("データがありません。")
         return
-    pass_count = (df['score'] >= 60).sum()
-    fail_count = (df['score'] < 60).sum()
+    pass_count = (df[subject + 'score'] >= 60).sum()
+    fail_count = (df[subject + 'score'] < 60).sum()
     plt.pie([pass_count, fail_count], labels=["合格", "不合格"], autopct="%1.1f%%")
     plt.title("合格・不合格の割合")
     plt.show()
@@ -122,8 +165,6 @@ while True:
         analyze(df)
     elif choice == "3":
         plot_hist(df)
-    elif choice == "4":
-        plot_ranking(df)
     elif choice == "5":
         plot_passrate(df)
     elif choice == "11":
