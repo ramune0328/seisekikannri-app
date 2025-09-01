@@ -5,7 +5,7 @@ import os # ファイル管理
 
 matplotlib.rcParams['font.family'] = 'Meiryo'
 
-FILENAME = r"C:\Users\Ramun\Box\My Box Notes\2年前学期\AIプログラミング入門\提出\students.csv"
+FILENAME = r"C:my program\成績管理アプリ\students.csv"
 
 # CSV読み込み（存在しなければ空のDataFrameを返す）
 def load_data():
@@ -30,6 +30,48 @@ def add_student():
     df = pd.concat([df, pd.DataFrame([{"name": name, "programing-score": programing_score, "network-score": network_score, "math-score": math_score, "total": programing_score + network_score + math_score}])], ignore_index=True)
     save_data(df)
     print(f"{name}さんのデータを追加しました。")
+
+# プログラミングの分析
+def programing_analysis(df):
+    if df.empty:
+        print("データがありません。")
+        return
+    print("\n=== 成績分析 ===")
+    print(f"平均点: {df['programing_score'].mean():.2f}")
+    print(f"中央値: {df['programing_score'].median():.2f}")
+    print(f"標準偏差: {df['programing_score'].std():.2f}")
+    print(f"最高点: {df['programing_score'].max()}")
+    print(f"最低点: {df['programing_score'].min()}")
+    pass_rate = (df['programing_score'] >= 60).mean() * 100
+    print(f"合格率: {pass_rate:.1f}%")
+
+# ネットワークの分析
+def network_analysis(df):
+    if df.empty:
+        print("データがありません。")
+        return
+    print("\n=== 成績分析 ===")
+    print(f"平均点: {df['network_score'].mean():.2f}")
+    print(f"中央値: {df['network_score'].median():.2f}")
+    print(f"標準偏差: {df['network_score'].std():.2f}")
+    print(f"最高点: {df['network_score'].max()}")
+    print(f"最低点: {df['network_score'].min()}")
+    pass_rate = (df['network_score'] >= 60).mean() * 100
+    print(f"合格率: {pass_rate:.1f}%")
+
+# 数学の分析
+def math_analyssis(df):
+    if df.empty:
+        print("データがありません。")
+        return
+    print("\n=== 成績分析 ===")
+    print(f"平均点: {df['math_score'].mean():.2f}")
+    print(f"中央値: {df['math_score'].median():.2f}")
+    print(f"標準偏差: {df['math_score'].std():.2f}")
+    print(f"最高点: {df['math_score'].max()}")
+    print(f"最低点: {df['math_score'].min()}")
+    pass_rate = (df['math_score'] >= 60).mean() * 100
+    print(f"合格率: {pass_rate:.1f}%")
 
 # 成績分析
 def analyze(df):
@@ -87,6 +129,9 @@ while True:
     print("3: ヒストグラム表示")
     print("4: ランキング表示")
     print("5: 合格率グラフ表示")
+    print("11: プログラミングの分析")
+    print("12: ネットワークの分析")
+    print("13: 数学の分析")
     print("0: 終了")
 
     choice = input("選択: ")
@@ -102,6 +147,12 @@ while True:
         plot_ranking(df)
     elif choice == "5":
         plot_passrate(df)
+    elif choice == "11":
+        programing_analysis(df)
+    elif choice == "12":
+        network_analysis(df)
+    elif choice == "13":
+        math_analyssis(df)
     elif choice == "0":
         break
     else:
